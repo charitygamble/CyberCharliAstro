@@ -1,5 +1,18 @@
 ---
-
+const pageTitle = "About Me";
+const identity = {
+	firstName: "Charity",
+	country: "United States",
+	occupation: "Student",
+	hobbies: ["Coding", "Gaming", "Reading", "CTF Events"]
+};
+const skills = ["HTML", "CSS", "JavaScript", "Python"];
+const happy = false;
+const finished = false;
+const goal = 3;
+const skillColor = "crimson";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 <html lang="en">
@@ -9,13 +22,37 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>CyberCharli</title>
+		<title>{pageTitle}</title>
+		<style define:vars={{skillColor, fontWeight, textCase}}>
+			h1 {
+				color: purple;
+				font-size: 4rem;
+			}
+			.skill {
+				color: var(--skillColor);
+				font-weight: var(--fontWeight);
+				text-transform: var(--textCase);
+			}
+			</style>
 	</head>
 	<body>
     <a href="/">Home</a>
 	<a href="/about">About</a>
     <a href="/blog">Blog</a>
-		<h1>About Me</h1>
-        <p>I'm learning to develop with Astro, but I think I still prefer Build Awesome to Astro. Astro is over-complicating web development, and frankly, I'm not here for it.</p>
+		<h1>{pageTitle}</h1>
+       <p>Here are a few facts about me:</p>
+	   <ul>
+	   <li>My name is {identity.firstName}.</li>
+	   <li>I live and work in the {identity.country} and I am a {identity.occupation}.</li>
+	   {identity.hobbies.length >= 2 && <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+	   }
+	   </ul>
+	   <p>My skills are:</p>
+	   <ul>
+	   {skills.map((skill) => <li class="skill">{skill}</li>)}
+	   </ul>
+	   {happy && <p>I am not happy to be learning Astro because it's garbaage!</p>}
+	   {finished && <p>I finished this idiotic tutorial</p>}
+	   {goal === 3 ? <p>My goal is to get rid of Astro in 3 days</p> : <p>My goal is not to get rid of Astro in 3 days.</p>}
 	</body>
 </html>
